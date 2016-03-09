@@ -72,7 +72,7 @@ class ManageArticleHandler(BaseHandler):
 		type = self.get_argument('type', None)
 		if action == 'edit' and id > -1 and type:
 			article = self.get_database.query(Article).filter(and_(Article.id == id, Article.type == type)).one()
-			return self.render2('edit_article.html', article=article)
+			return self.render2('edit_article.html', article=article, **self.settings)
 		else:
 			article_count = self.get_database.query(func.count('*')).filter(Article.type == TYPE_ENUM[0])\
 							.scalar()
@@ -84,8 +84,9 @@ class ManageArticleHandler(BaseHandler):
 				essays = self.get_database.query(Article.id, Article.creat_time, Article.title,\
 							 Article.type).filter(Article.type == TYPE_ENUM[1]).all()
 				return self.render2('admin_article.html', article_count=article_count+1, \
-									essay_count=essay_count+1,articles=articles, essays=essays)
-			return self.render2('admin_article.html')
+									essay_count=essay_count+1,articles=articles, essays=essays,\
+									**self.settings)
+			return self.render2('admin_article.html', **self.settings)
 
 	@tornado.web.authenticated
 	def post(self):
@@ -105,7 +106,7 @@ class ManageFriendHandler(BaseHandler):
 			id = int(self.get_argument('id', -1))
 			if id > -1:
 				friend = self.get_database.query(Friend).filter(Friend.id == id).one()
-				return self.render2('edit_friend.html', friend=friend)
+				return self.render2('edit_friend.html', friend=friend, **self.settings)
 		else:
 			friends = self.get_database.query(Friend).all()
 			return self.render2('admin_friend.html', friends=friends, **self.settings)

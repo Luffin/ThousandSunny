@@ -35,8 +35,14 @@
     </nav>
     <div class="container-fluid">
       <div class="row">
-        {% block nav %}
-        {% endblock %}
+        <div class="col-sm-3 col-md-2 sidebar">
+          {% block nav %}
+          {% endblock %}
+          <div style="margin-top: 20em;">
+            Powered by <a href="https://github.com/Luffin/ThousandSunny" target="_blank">ThousandSunny</a>.<br />
+            Copyright © 2016 by <a href="mailto:{{ email }}">Luffin</a>. All rights reserved.
+          </div>
+        </div>
         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
           {% block div%}
           {% endblock %}

@@ -14,6 +14,9 @@ theme_name = 'jekyll-minimal-theme-gh-pages'
 # Blog's title
 title = "Luffin's Blog"
 
+# Email
+email = 'luffin@qq.com'
+
 # How many articles do you want to display in home page
 ARTICLES_NUM = 3
 
