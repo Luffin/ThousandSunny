@@ -10,8 +10,8 @@
 
 克隆项目到本地并进入文件夹
 
+	git clone https://github.com/Luffin/ThousandSunny.git
 	cd ThousandSunny
-	git clone 
 安装所需第三方Python库	
 	
 	tornado
