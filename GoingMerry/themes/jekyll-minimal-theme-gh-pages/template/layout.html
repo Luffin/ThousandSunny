@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  <title>{{ page_title }} - {{ title }}</title>
+  <link rel="stylesheet" type="text/css" href="/static/css/style2.css" >
+  <link rel="stylesheet" type="text/css" href="/static/css/to-top.css">
+  <script src="/static/js/modernizr.js"></script>
+</head>
+<body>
+
+<div class="container">
+<header class="masthead">
+   <h3 class="masthead-title">
+     <a href="/">{{ title }}</a>
+     <small>
+        &nbsp;&nbsp;&nbsp;<a href="/article">Article</a>
+     </small>
+     <small>
+       &nbsp;&nbsp;&nbsp;<a href="/essay">Essay</a>
+     </small>
+     <small>
+       &nbsp;&nbsp;&nbsp;<a href="/friends">Friends</a>
+     </small>
+     <small>
+       &nbsp;&nbsp;&nbsp;<a href="/feed">Feed</a>
+     </small>
+     <small>
+       &nbsp;&nbsp;&nbsp;<a href="/about">About</a>
+     </small>
+   </h3>
+</header>
+
+<div id="content">
+  {% block body %}
+  {% endblock %}
+</div>
+</div><!-- .container -->
+<footer class="footer">
+  {% block page %}
+  {% endblock %}
+  <div class="footer-copyright">
+    Powered by ThousandSunny.<br />
+    Copyright © 2016 by <a href="mailto:luffin@qq.com" class="post-title">Luffin</a>. All rights reserved.<br />
+    This theme is modified by <a href="https://github.com/henrythemes/jekyll-minimal-theme" class="post-title" target="_blank">jekyll-minimal-theme.</a>
+  </div>
+</footer>
+<a href="#0" class="cd-top cd-fade-out">Top</a>
+<script src="/static/js/jquery-1.12.1.min.js"></script>
+<script src="/static/js/main.js"></script>
+</body>
+</html>

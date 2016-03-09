@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>后台管理</title>
+    <link href="/admin/static/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/admin/static/css/dashboard.css" rel="stylesheet">
+    <style type="text/css">
+      .post-title,
+      .post-title a {
+        color: #303030;
+      }
+    </style>
+    <script src="/admin/static/js/jquery-1.12.1.min.js"></script>
+  </head>
+  <body>
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="/">首页</a>
+          <a class="navbar-brand" href="/onepeice/article">后台管理</a>
+        </div>
+      </div>
+    </nav>
+    <div class="container-fluid">
+      <div class="row">
+        {% block nav %}
+        {% endblock %}
+        <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+          {% block div%}
+          {% endblock %}
+        </div>
+      </div>
+    </div>
+    <script src="/admin/static/js/bootstrap-theme.min.js"></script>
+    <script src="/admin/static/js/bootstrap.min.js"></script>
+    </body>
+</html>

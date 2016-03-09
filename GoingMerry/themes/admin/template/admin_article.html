@@ -1,0 +1,199 @@
+{% extends "admin_layout.html" %}
+
+{% block nav %}
+<div class="col-sm-3 col-md-2 sidebar">
+  <ul class="nav nav-sidebar">
+    <li class="text-center active"><a href="/onepeice/article" class="submenu selected-item"><h4>文章管理</h4><span class="sr-only">(current)</span></a></li>
+    <li class="text-center"><a href="/onepeice/friend" class="submenu arrow"><h4>友链管理</h4></a></li>
+  </ul>
+</div>
+{% endblock %}
+{% block div %}
+<div>
+	<div class="jumbotron">
+		<h3>添加新文章</h3>
+		<hr />
+			<p>
+				<a class="btn btn-primary btn-lg" role="button" data-toggle="collapse" href="#add" aria-expanded="false" aria-controls="add">
+					  添加新文章
+				</a>
+			</p>
+			<div class="collapse" id="add">
+				<div class="well">
+				    <form  action="/onepeice/post/article" method="post">
+					  	<div class="form-group">
+					    	<label for="exampleInputEmail1"><h4>Title</h4></label>
+					    	<input type="text" name="title" class="form-control input-lg" id="exampleInputEmail1" placeholder="Title">
+					  	</div>
+					  	<div class="form-group">
+					  		<label class="theradio"><h4>Type</h4></label>
+					  		<div id="theradio">
+								<label class="radio-inline">
+								  <input type="radio" name="type" id="inlineRadio1" value="article"> 
+								  Article
+								</label>
+								<label class="radio-inline">
+								  <input type="radio" name="type" id="inlineRadio2" value="essay"> 
+								  Essay
+								</label>
+							</div>
+						</div>
+					  	<div class="form-group">
+					    	<label for="exampleInputPassword1"><h4>Content</h4></label>					   <textarea name="content" class="form-control" rows="11" placeholder="Content"></textarea>
+					  	</div>
+					  <button type="submit" class="btn btn-primary btn-lg col-md-offset-11">提交</button>
+					</form>
+				</div>
+			</div>
+
+	</div>
+	<hr />
+	{% if (articles and article_count) or (essays and essay_count) %}
+		<table id="table"class="table table-hover">
+            <thead>
+              <tr>
+                <th>Type</th>
+                <th>ID</th>
+                <th>Date</th>
+                <th>Title</th>
+                <th>Edit</th>
+              </tr>
+            </thead>
+            <tbody>
+            	{% if articles %}
+		              	<tr>
+		                	<th id="th-article" rowspan="{{ article_count }}">Article</th>
+		              	</tr>
+		            {% for article in articles %}
+		                <tr>
+		                	<td>{{ article.id }}</td>
+		                	<td>{{ article.creat_time }}</td>
+		                	<td><a href="/article/{{ article.title | urlencode }}" target="_blank">{{ article.title }}</a></td>
+		                	<td>
+								<a href="/onepeice/article?action=edit&id={{ article.id }}&type={{ article.type }}">
+									<span class="glyphicon glyphicon-pencil post-title"></span>
+								</a>
+								<a href="##" class="delete" data-id="{{ article.id }}" th-id="th-article">
+									<span class="glyphicon glyphicon-trash post-title"></span>
+								</a>						
+							</td>
+		                </tr>
+
+		            {% endfor %}
+	            {% else %}
+	            	<h1 class="text-center">主人还没有提交文章呢_(:з」∠)_</h1>
+	            {% endif %}
+	            {% if essays %}
+		              	<tr>
+		                	<th id="th-essay" rowspan="{{ essay_count }}">Essay</th>
+		              	</tr>
+		            {% for essay in essays %}
+		                <tr>
+		                	<td>{{ essay.id }}</td>
+		                	<td>{{ essay.creat_time }}</td>
+		                	<td>
+		                		<a href="/essay/{{ essay.title | urlencode }}" target="_blank">{{ essay.title }}</a>
+		                	</td>
+		                	<td>
+								<a href="/onepeice/article?action=edit&id={{ essay.id }}&type={{ essay.type }}">
+									<span class="glyphicon glyphicon-pencil post-title"></span>
+								</a>
+								<a href="##" class="delete" data-id="{{ essay.id }}" th-id="th-essay">
+									<span class="glyphicon glyphicon-trash post-title"></span>
+								</a>
+
+							</td>
+		                </tr>
+			        {% endfor %}
+	            {% else %}
+	            	<h1 class="text-center">主人还没有提交随笔呢_(:з」∠)_</h1>
+	            {% endif %}
+	         <div class="modal fade" id="edit-fuck" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+			  <div class="modal-dialog">
+			    <div class="modal-content">
+			      <div class="modal-header">
+			        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+			        <h4 class="modal-title">编辑文章</h4>
+			      </div>
+			      <div class="modal-body">
+			      	<form  action="/onepeice/post/article" method="post">
+				      	<div class="form-inline">
+				      		<div class="form-group form-inline">
+				      			<label for="input-id"><h4>ID</h4></label>
+				      			<input type="text" name="id" class="form-control" id="input-id" placeholder="id">
+				      		</div>
+				      		&nbsp;&nbsp;
+						  	<div class="form-group form-inline">
+						    	<label for="input-title"><h4>Title</h4></label>
+						    	<input type="text" name="title" class="form-control" id="input-title" placeholder="Title">
+						  	</div>
+						</div>
+					  	<div class="form-group form-inline">
+					  		<label class="theradio"><h4>Type</h4></label>
+					  		<div id="theradio">
+								<label class="radio-inline">
+								  <input type="radio" name="type" id="inlineRadio1" value="article"
+								  {% if article_check %}
+								  		checked
+								  {% endif %}
+								  > 
+								  Article
+								</label>
+								<label class="radio-inline">
+								  <input type="radio" name="type" id="inlineRadio2" value="essay"
+								  {% if essay_check %}
+								  		checked
+								  {% endif %}
+								  > 
+								  Essay
+								</label>
+							</div>
+						</div>
+					  	<div class="form-group">
+					    	<label><h4>Content</h4></label>					   
+					    	<textarea name="content" class="form-control" rows="18" placeholder="Content"></textarea>
+					  	</div>
+					</form>
+			      </div>
+			      <div class="modal-footer">
+			        <button type="button" class="btn btn-default btn-lg" data-dismiss="modal">关闭</button>
+			        <button type="submit" class="btn btn-primary btn-lg">提交</button>
+			      </div>
+			    </div><!-- /.modal-content -->
+			  </div><!-- /.modal-dialog -->
+			</div><!-- /.modal -->
+
+            </tbody>
+          </table>
+          	{% else %}
+		<h1 class="text-center">还没有提交文章呢(＞﹏＜)</h1>
+		
+	{% endif %}
+
+</div>
+<script>
+    $(".delete").click(function(){
+        var articleID = this.attributes['data-id'].value,
+            parent = $(this).parent().parent(),
+            thID = this.attributes["th-id"].value,
+            rowspan_id = $("#"+thID).attr("rowspan");
+        // alert(rowspan_id);
+        $.ajax({
+            url: "/onepeice/article",
+            data: {id: articleID, action: "del"},
+            type: "POST",
+            success: function(){
+                // $(".alert-success").show();
+                // $(".alert-success span").text(" The link had been deleted!");
+                $(parent).hide();
+                $("#"+thID).attr("rowspan", rowspan_id-1);
+            },
+            error: function(){
+                // $(".alert-danger").show();
+                // $(".alert-danger span").text(" Delete the link failed.");
+            }
+        })
+    })
+</script>
+
+{% endblock %}

@@ -1,0 +1,16 @@
+{% extends "layout.html" %}
+
+{% block body %}
+
+<h1>Friends</h1>
+
+	{% if friends %}
+		{% for friend in friends %}
+			<article class='post-title'>
+			  <li><a href="http://{{ friend.url | urlencode }}" target="_blank">{{ friend.name }}</a></li>
+			</article>
+		{% endfor %}
+	{% else %}
+		<p>还没添加朋友呀_(:з」∠)_</p>
+	{% endif %}
+{% endblock %}

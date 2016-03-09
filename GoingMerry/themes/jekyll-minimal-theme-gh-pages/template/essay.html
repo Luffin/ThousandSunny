@@ -1,0 +1,37 @@
+{% extends "layout.html" %}
+
+{% block body %}
+
+	<h1>Essay</h1>
+	{% if articles %}
+		{% for article in articles %}
+		<div>
+		  {{ article.creat_time | datetime }}
+		    »
+		  <span class='post-title'>
+		    <a href="/essay/{{ article.title | urlencode }}">{{ article.title }}</a>
+		  </span>
+		</div>
+		{% endfor %}
+	{% else %}
+		<div class="not-found">	
+			<h3>主人还没有发布文章呢_(:з」∠)_</h3>
+			<img src="/static/imgs/mengbi.gif" class="not-found">
+		</div>
+	{% endif %}
+
+{% endblock %}
+
+{% block page %}
+{% if index.pages %}
+	<div class="page">
+			<a href="/essay?page={{ index.pages[0] }}" class="post-title {% if index.older < 1 %}a-hidden{% endif %}">&laquo;</a>
+			<a href="/essay?page={{ index.older }}" class="post-title {% if index.older < 1 %}a-hidden{% endif %}">&lsaquo;</a>
+			{% for page in index.pages %}
+				<a href="/essay?page={{ page }}" {% if page != index.now %}class="post-title"{% endif %}>{{ page }}</a>
+			{% endfor %}
+			<a href="/essay?page={{ index.newer }}" class="post-title {% if index.newer > index.pages[-1] %}a-hidden{% endif %}">&rsaquo;</a>
+			<a href="/essay?page={{ index.pages[-1] }}" class="post-title {% if index.newer > index.pages[-1] %}a-hidden{% endif %}">&raquo;</a>
+	</div>
+{% endif %}
+{% endblock %}

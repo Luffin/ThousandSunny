@@ -1,0 +1,17 @@
+{% extends "layout.html" %}
+
+{% block body %}
+	<article class='post'>
+  		<h1 class='post-title'>{{ articles.title }}</h1>
+  		<div class="post-date">{{ articles.creat_time | datetime }}</div>
+  		{{ articles.content | markdown }}
+	</article>
+
+{% endblock %}
+
+{% block page %}
+<div class="page">
+	<a href="/{% if pages.type == 'article' %}article{% elif pages.type == 'essay' %}essay{% endif %}/{{ pages.older_title | urlencode }}" class="post-title page-left {% if not pages.older_title %}a-hidden{% endif %}">&laquo;Prev</a>
+	<a href="/{% if pages.type == 'article' %}article{% elif pages.type == 'essay' %}essay{% endif %}/{{ pages.newer_title | urlencode }}" class="post-title page-right {% if not pages.newer_title %}a-hidden{% endif %}">Next&raquo;</a>
+</div>
+{% endblock %}

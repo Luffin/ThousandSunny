@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>{{ title }}</title>
+  <link href="http://{{ url }}/feed.xml" rel="self"/>
+  <link href="http://{{ url }}/"/>
+  {% if articles %}
+  <updated>{{ articles[0].creat_time }}</updated>
+  {% endif %}
+  <id>http://{{ url }}/</id>
+  <author>
+    <name>{{ title }}</name>
+  </author>
+  {% if articles %}
+    {% for article in articles %}
+    <entry>
+      <title>{{ article.title | urlencode }}</title>
+      <link href="http://{{ url }}/article/{{ article.title | urlencode }}"/>
+      <updated>{{ article.creat_time }}</updated>
+      <id>htt://{{ url }}/article/{{ article.title | urlencode }}</id>
+      <content type="html"><![CDATA[{{ article.content | markdown | safe }}]]></content>
+    </entry>
+    {% endfor %}
+  {% endif %}
+</feed>

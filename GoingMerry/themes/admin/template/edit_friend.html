@@ -1,0 +1,42 @@
+{% extends "admin_layout.html" %}
+
+{% block nav %}
+<div class="col-sm-3 col-md-2 sidebar">
+  <ul class="nav nav-sidebar">
+    <li class="text-center"><a href="/onepeice/article" class="submenu selected-item"><h4>文章管理</h4><span class="sr-only">(current)</span></a></li>
+    <li class="text-center active"><a href="/onepeice/friend" class="submenu arrow"><h4>友链管理</h4></a></li>
+  </ul>
+</div>
+{% endblock %}
+
+{% block div %}
+<div class="jumbotron">
+	<h3>编辑友链</h3>
+	<hr />
+	<form action="/onepeice/friend" method="post">
+		<div class="form-group form-group-lg">
+			<label for="input_name"><h4>ID:</h4></label>
+			<input name="id" value="{{ friend.id }}" type="hidden">
+			<input type="text" name="new_id" class="form-control" id="input_id" placeholder="ID" value="{{ friend.id }}">
+		</div>
+		<div class="form-group form-group-lg">
+			<label for="input_name"><h4>Name:</h4></label>
+			<input type="text" name="name" class="form-control" id="input_name" placeholder="Friend's name" value="{{ friend.name }}">
+		</div>
+		<div class="form-group form-group-lg">
+			<label for="input_url"><h4>URL:</h4></label>
+			<div class="input-group">
+			    <div class="input-group-addon"><strong>http://</strong></div>
+			    <input type="text" name="url" class="form-control" id="input_url" placeholder="www.xxx.com" value="{{ friend.url }}">
+			</div>
+		</div>
+		<input name="action" value="add" type="hidden">
+		<div class="form-inline">
+			<div class="form-group col-md-offset-10">
+				<a href="/onepeice/friend" type="button" class="btn btn-default btn-lg">返回</a>
+				<button type="submit" class="btn btn-primary btn-lg">确定</button>
+			</div>
+		</div>
+	</form>
+</div>
+{% endblock %}

@@ -1,0 +1,85 @@
+{% extends "admin_layout.html" %}
+
+{% block nav %}
+<div class="col-sm-3 col-md-2 sidebar">
+  <ul class="nav nav-sidebar">
+    <li class="text-center"><a href="/onepeice/article" class="submenu selected-item"><h4>文章管理</h4><span class="sr-only">(current)</span></a></li>
+    <li class="text-center active"><a href="/onepeice/friend" class="submenu arrow"><h4>友链管理</h4></a></li>
+  </ul>
+</div>
+{% endblock%}
+
+{% block div %}
+<div>
+	<div class="jumbotron">
+		<h3>添加友链</h3>
+		<hr />
+		<form action="#" method="post" class="form-inline">
+		  <div class="form-group form-group-lg col-sm-4">
+		    <label for="input_name">Name:</label>
+		    <input type="text" name="name" class="form-control" id="input_name" placeholder="Friend's name">
+		  </div>
+		  <div class="form-group form-group-lg col-sm-5">
+		    <label for="input_url">URL:</label>
+		    <div class="input-group">
+			    <div class="input-group-addon"><strong>http://</strong></div>
+			    <input type="text" name="url" class="form-control" id="input_url" placeholder="www.xxx.com">
+			</div>
+		  </div>
+		  <input name="action" value="add" type="hidden">
+		  <button type="submit" class="btn btn-primary btn-lg">确定</button>
+		</form>
+		<br />
+	</div>
+	<hr />
+	{% if friends %}
+		<table class="table table-hover table-striped">
+	  		<thead>
+	  			<tr>
+	  				<th>ID</th>
+	  				<th>Name</th>
+	  				<th>URL</th>
+	  				<th>Edit</th>
+	  			</tr>
+	  		</thead>
+	  		<tbody>
+	  			{% for friend in friends %}
+		  			<tr>
+		  				<td>{{ friend.id }}</td>
+		  				<td>{{ friend.name }}</td>
+						<td><a href="http://{{ friend.url | urlencode }}" target="_blank">http://{{ friend.url | urlencode }}</a></td>
+						<td>
+							<a href="/onepeice/friend?action=edit&id={{ friend.id }}">
+								<span class="glyphicon glyphicon-pencil post-title"></span>
+							</a>
+							<a href="##" class="delete" data-id="{{ friend.id }}">
+								<span class="glyphicon glyphicon-trash post-title"></span>
+							</a>
+						</td>
+		  			</tr>
+		  		{% endfor %}
+	  		</tbody>
+		</table>
+	{% else %}
+		<h1 class="text-center">还没有朋友呢(＞﹏＜)</h1>
+	{% endif %}
+</div>
+<script>
+    $(".delete").click(function(){
+        var friendId = this.attributes['data-id'].value,
+            parent = $(this).parent().parent();
+        $.ajax({
+            url: "/onepeice/friend",
+            data: {id: friendId, action: "del"},
+            type: "POST",
+            success: function(){
+                $(parent).hide();
+            },
+            error: function(){
+                $(".alert-danger").show();
+                $(".alert-danger span").text(" Delete the link failed.");
+            }
+        })
+    })
+</script>
+{% endblock %}
