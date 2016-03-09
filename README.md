@@ -1,5 +1,5 @@
 #ThousandSunny
----
+
 在阅读了R菊苣的[pyprint](https://github.com/RicterZ/pyprint)和MartianZ的[MartianZ-BLOG](https://github.com/MartianZ/MartianZ-BLOG)的代码后，自己尝试写的一个渣博客。
 
 博客使用tornado+jinja2+sqlalchemy完成博客搭建，采用sqlite作为数据库存储文章友链等数据，博客的主题修改自[jekyll-minimal-theme](https://github.com/henrythemes/jekyll-minimal-theme)。后台使用bootstrap框架搭建，可以添加、删除和编辑文章及友链。
@@ -7,7 +7,7 @@
 博客里的一些命名来自《One Piece》
 
 ###Installation
----
+
 克隆项目到本地并进入文件夹
 
 	cd ThousandSunny
@@ -40,7 +40,6 @@ __其中的COOKIE_SECRET要自己修改并妥善保管__
 	
 
 ###TODO
----
 
 响应式布局
 
