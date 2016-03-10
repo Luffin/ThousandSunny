@@ -60,8 +60,8 @@ class ShowArticleHandler(BaseHandler):
 		try:
 			articles = self.get_database.query(Article).filter(and_(Article.title == title, Article.type\
 				== TYPE_ENUM[0])).one()
-			title_id = self.get_database.query(Article.id).filter(and_(Article.title == title, \
-					Article.type == TYPE_ENUM[0])).one()[0]
+			title_id, = self.get_database.query(Article.id).filter(and_(Article.title == title, \
+					Article.type == TYPE_ENUM[0])).one()
 			try:
 				all_title = self.get_database.query(Article.id, Article.title).filter(Article.type\
 				 == TYPE_ENUM[0]).order_by(Article.id.desc()).all()
@@ -95,8 +95,8 @@ class ShowEssayHandler(BaseHandler):
 		try:
 			articles = self.get_database.query(Article).filter(and_(Article.title == title, Article.type\
 				== TYPE_ENUM[1])).one()
-			title_id = self.get_database.query(Article.id).filter(and_(Article.title == title, \
-					Article.type == TYPE_ENUM[1])).one()[0]
+			title_id, = self.get_database.query(Article.id).filter(and_(Article.title == title, \
+					Article.type == TYPE_ENUM[1])).one()
 			try:
 				all_title = self.get_database.query(Article.id, Article.title).filter(Article.type\
 				 == TYPE_ENUM[1]).order_by(Article.id.desc()).all()
