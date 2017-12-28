@@ -1,4 +1,4 @@
-#ThousandSunny
+# ThousandSunny
 
 在阅读了R菊苣的[pyprint](https://github.com/RicterZ/pyprint)和MartianZ的[MartianZ-BLOG](https://github.com/MartianZ/MartianZ-BLOG)的代码后，自己尝试写的一个渣博客。
 
@@ -6,7 +6,7 @@
 
 博客里的一些命名来自《One Piece》
 
-###Installation
+### Installation
 
 克隆项目到本地并进入文件夹
 
@@ -40,7 +40,7 @@ __其中的COOKIE_SECRET要自己修改并妥善保管__
 	python main.py
 	
 
-###TODO
+### TODO
 
 响应式布局
 
